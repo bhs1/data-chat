@@ -1,2 +1,5 @@
 data/iMessage Green Street Hooligans.pdf
 .DS_Store
+chatbotenv
+*.pickle
+docs/chroma
