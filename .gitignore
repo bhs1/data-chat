@@ -1,4 +1,4 @@
-data/iMessage Green Street Hooligans.pdf
+data/*
 .DS_Store
 chatbotenv
 *.pickle
