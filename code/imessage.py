@@ -1,9 +1,9 @@
 import sqlite3
 import pandas as pd
 
-########################################
+#############################################
 # Run this file to generate data/messages.txt
-########################################
+##############################################
 
 def get_imessages():
     conn = sqlite3.connect('/Users/bensolis-cohen/Library/Messages/chat.db')
@@ -36,6 +36,7 @@ def load_database(messages_df):
             row = messages_df.iloc[index]
             raw_row = row['text']
             counters["total_rows"] += 1
+            # TODO(bensc): Find out why significant portion of  messages are None.
             if raw_row is None:
                 counters["none_rows"] += 1
                 continue
