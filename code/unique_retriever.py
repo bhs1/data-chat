@@ -4,14 +4,12 @@ from langchain_core.retrievers import BaseRetriever
 from langchain_core.pydantic_v1 import Field
 from typing import List
 from langchain_core.callbacks import (
-    AsyncCallbackManagerForChainRun,
     CallbackManagerForChainRun,
-    Callbacks,
 )
 
+
 class UniqueRetrievalQA(RetrievalQA):
-    """RetrievalQA that returns unique documents
-    """
+    """RetrievalQA that returns unique documents"""
 
     retriever: BaseRetriever = Field(exclude=True)
 
@@ -34,7 +32,7 @@ class UniqueRetrievalQA(RetrievalQA):
                 i += 1
                 doc_set.add(doc_contents)
                 unique_docs_list.append(doc)
-            if i >= 7: # TODO(bensc): Get this externally
+            if i >= 7:  # TODO(bensc): Get this externally
                 break
         return unique_docs_list
 

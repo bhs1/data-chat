@@ -10,7 +10,9 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from unique_retriever import UniqueRetrievalQA
 
 # Load messages
-loader = TextLoader("/Users/bensolis-cohen/Projects/Chat with my data/data/messages.txt")
+loader = TextLoader(
+    "/Users/bensolis-cohen/Projects/Chat with my data/data/messages.txt"
+)
 pages = loader.load()
 
 # Split documents
@@ -18,8 +20,8 @@ text_splitter = RecursiveCharacterTextSplitter(chunk_size=2000, chunk_overlap=10
 splits = text_splitter.split_documents(pages)
 
 # Set up OpenAI and Chroma
-openai.api_key = os.environ['OPENAI_API_KEY']
-persist_directory = 'docs/chroma/'
+openai.api_key = os.environ["OPENAI_API_KEY"]
+persist_directory = "docs/chroma/"
 embedding = OpenAIEmbeddings()
 
 # Set up langchain
@@ -29,10 +31,7 @@ os.environ["LANGCHAIN_ENDPOINT"] = "https://api.langchain.plus"
 # vectordb = Chroma.from_documents(documents=splits, persist_directory=persist_directory, embedding=embedding)
 # vectordb.persist()
 
-vectordb = Chroma(
-    persist_directory=persist_directory,
-    embedding_function=embedding
-)
+vectordb = Chroma(persist_directory=persist_directory, embedding_function=embedding)
 
 
 # Build prompt
@@ -48,8 +47,8 @@ qa_chain = UniqueRetrievalQA.from_chain_type(
     llm,
     retriever=vectordb.as_retriever(search_kwargs={"k": 20}),
     return_source_documents=True,
- #   chain_type="refine"#,
-    chain_type_kwargs={"prompt": QA_CHAIN_PROMPT}
+    #   chain_type="refine"#,
+    chain_type_kwargs={"prompt": QA_CHAIN_PROMPT},
 )
 
 while True:
