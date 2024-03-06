@@ -5,7 +5,6 @@ import pandas as pd
 # Run this file to generate data/messages.txt
 ##############################################
 
-
 def get_imessages():
     conn = sqlite3.connect("/Users/bensolis-cohen/Library/Messages/chat.db")
     cur = conn.cursor()

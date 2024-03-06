@@ -54,5 +54,6 @@ qa_chain = UniqueRetrievalQA.from_chain_type(
 while True:
     question = input("Please ask a question then press [enter]: ")
     result = qa_chain.invoke({"query": question})
+    print()
     print(result["result"])
     print()
