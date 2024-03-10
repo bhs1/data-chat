@@ -20,7 +20,7 @@ def fix_and_parse_json(file_path):
         content = content.replace('\n\n', '\n')
         
         # Remove all new lines
-        content = content.replace('\n', '')
+        content = content.replace('\n', '').replace('```', '').replace('json', '')
         
         # Remove all square brackets
         content = content.replace('[', '').replace(']', '')
@@ -52,5 +52,5 @@ def fix_and_parse_json(file_path):
 
 # Example usage
 # TODO: Make sure it works for scott and greg and then proceed with fine tuning.
-data = fix_and_parse_json('data/ben_chunked.txt')
+data = fix_and_parse_json('data/scott_chunked.txt')
 print(data)
