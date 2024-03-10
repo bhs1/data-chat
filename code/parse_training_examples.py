@@ -51,6 +51,6 @@ def fix_and_parse_json(file_path):
             return []
 
 # Example usage
-# TODO: Make sure it works for scott and greg and then proceed with fine tuning.
+# TODO: Proceed with fine tuning.
 data = fix_and_parse_json('data/scott_chunked.txt')
 print(data)
