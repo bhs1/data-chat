@@ -3,15 +3,13 @@ import re
 
 def fix_and_parse_json(file_path):
     """
-    Fixes a text file by removing all double newlines, ensuring proper separation between JSON objects,
-    removing all new lines and square brackets, handling multiple JSON arrays and objects concatenated without proper separation,
-    and parses it into a list of dictionaries.
+    Fixes a text file and parses it into a list of dictionaries.
     
     Args:
-    - file_path (str): The path to the text file.
+    - file_path (str): The path to the text file to be fixed and parsed.
     
     Returns:
-    - List[dict]: A list of dictionaries parsed from the fixed JSON content.
+    - List[dict] or None: A list of dictionaries parsed from the fixed JSON content, or None if an error occurs.
     """
     with open(file_path, 'r') as file:
         content = file.read()
@@ -48,9 +46,35 @@ def fix_and_parse_json(file_path):
         except json.JSONDecodeError as e:
             print(f"Error decoding JSON: {e}")
             print(fixed_content)
-            return []
+            return None
+
+def write_json_to_file(json_data, output_file_path):
+    """
+    Writes JSON data to a specified file.
+    
+    Args:
+    - json_data (List[dict]): The JSON data to write.
+    - output_file_path (str): The path to the output file.
+    
+    Returns:
+    - bool: True if the file was successfully written, False otherwise.
+    """
+    if json_data is None:
+        print("No JSON data to write.")
+        return False
+    
+    try:
+        with open(output_file_path, 'w') as outfile:
+            json.dump(json_data, outfile, indent=4)
+        return True
+    except Exception as e:
+        print(f"Error writing JSON to file: {e}")
+        return False
 
 # Example usage
-# TODO: Proceed with fine tuning.
-data = fix_and_parse_json('data/scott_chunked.txt')
-print(data)
+for file_prefix in ('data/scott_chunked', 'data/ben_chunked', 'data/greg_chunked'):
+    json_data = fix_and_parse_json(file_prefix + '.txt')
+    if write_json_to_file(json_data, file_prefix + '.json'):
+        print("Data successfully written to file.")
+    else:
+        print(f'Failed to write data to file for {file_prefix}')
