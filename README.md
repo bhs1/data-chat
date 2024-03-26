@@ -1,4 +1,4 @@
-# Attempt at a bot to chat with imessages.
+# A bot to chat with imessages.
 
 ## Basic functionality
 * Chunk the chat.db file on macbook into a vector database
